@@ -8,22 +8,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
-import com.bobrek.musicat.R
 import com.bobrek.musicat.di.SpotifyConstants
+import com.bobrek.musicat.ui.view.screens.MainScreen
 import com.bobrek.musicat.ui.viewmodel.MainViewModel
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector.ConnectionListener
@@ -33,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private lateinit var mSpotifyAppRemote: SpotifyAppRemote
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +60,7 @@ class MainActivity : ComponentActivity() {
             .build(),
             object : ConnectionListener {
                 override fun onConnected(spotifyAppRemote: SpotifyAppRemote) {
-                    mSpotifyAppRemote = spotifyAppRemote
+                    SpotifyConstants.mSpotifyAppRemote = spotifyAppRemote
                 }
 
                 override fun onFailure(throwable: Throwable) {
@@ -83,28 +68,4 @@ class MainActivity : ComponentActivity() {
                 }
             })
     }
-}
-
-
-@Composable
-fun MainScreen() {
-    Scaffold(
-        content = { Content() })
-}
-
-@Composable
-fun Content() {
-    Column(
-        modifier = Modifier
-            .fillMaxHeight(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(painter = painterResource(id = R.drawable.logo), contentDescription = "logo")
-        TittleText(text = "Musicat")
-    }
-}
-
-@Composable
-fun TittleText(text: String) {
-    Text(text = text, fontSize = 32.sp, fontWeight = FontWeight.Bold)
 }

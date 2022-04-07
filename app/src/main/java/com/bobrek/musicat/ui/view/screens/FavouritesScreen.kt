@@ -5,12 +5,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.bobrek.musicat.domain.SpotifyPlayer
-import com.bobrek.musicat.domain.model.Playlist
-import com.bobrek.musicat.ui.view.components.DisplayItem
+import com.bobrek.musicat.domain.model.Track
+import com.bobrek.musicat.ui.view.components.DisplaySongItem
 
 @Composable
-fun HomeScreen(
-    list: List<Playlist>?
+fun FavouritesScreen(
+    list: List<Track>?
 ) {
     LazyColumn(
         modifier = Modifier
@@ -18,11 +18,11 @@ fun HomeScreen(
     ) {
         list?.forEach {
             item {
-                DisplayItem(
-                    image = it.images?.get(0)?.url.toString(),
+                DisplaySongItem(
+                    image = it.album?.images?.get(1)?.url.toString(),
                     title = it.name,
-                    user = it.owner.display_name.toString(),
-                    ) {
+                    user = it.artists[0].name.toString()
+                ) {
                     SpotifyPlayer.play(it.uri)
                 }
             }

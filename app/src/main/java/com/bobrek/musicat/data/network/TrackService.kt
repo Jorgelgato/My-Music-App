@@ -1,23 +1,24 @@
 package com.bobrek.musicat.data.network
 
-import com.bobrek.musicat.data.models.PlaylistModel
+import com.bobrek.musicat.data.models.TrackInfo
+import com.bobrek.musicat.data.models.TrackModel
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PlaylistService @Inject constructor(
+class TrackService @Inject constructor(
     private val api: SpotifyApiClient,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun getPlaylists(): List<PlaylistModel> {
+    suspend fun getFavourites(): List<TrackModel> {
         return withContext(dispatcher) {
-            api.getPlaylists().body()?.items?.map {
+            api.getFavourites().body()?.items?.map {
                 Gson().fromJson(
                     it,
-                    PlaylistModel::class.java
+                    TrackInfo::class.java
                 )
-            } ?: emptyList()
+            }?.map { it.track } ?: emptyList()
         }
     }
 }

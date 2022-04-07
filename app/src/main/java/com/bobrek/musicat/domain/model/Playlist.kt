@@ -1,7 +1,5 @@
 package com.bobrek.musicat.domain.model
 
-import com.bobrek.musicat.data.models.*
-
 data class Playlist(
     val collaborative: Boolean?,
     val description: String?,
@@ -16,49 +14,5 @@ data class Playlist(
     val snapshot_id: String?,
     val tracks: Any?,
     val type: String?,
-    val uri: String?
-)
-
-fun PlaylistModel.toDomain() = Playlist(
-    collaborative,
-    description,
-    external_urls,
-    href,
-    id,
-    images?.map { it.toDomain() },
-    name,
-    owner.toDomain(),
-    primary_color,
-    public,
-    snapshot_id,
-    tracks,
-    type,
-    uri
-)
-
-fun ImageModel.toDomain() = Image(
-    height,
-    url,
-    width
-)
-
-fun UserModel.toDomain() = User(
-    country,
-    display_name,
-    email,
-    explicit_content,
-    external_urls,
-    followers?.toDomain(),
-    href,
-    id,
-    images?.map { it.toDomain() },
-    name,
-    product,
-    type,
-    uri
-)
-
-fun FollowersModel.toDomain() = Followers(
-    href,
-    total
+    val uri: String
 )

@@ -14,5 +14,5 @@ data class PlaylistModel(
     val snapshot_id: String?,
     val tracks: Any?,
     val type: String?,
-    val uri: String?
+    val uri: String
 )
