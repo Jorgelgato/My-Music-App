@@ -4,13 +4,14 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.bobrek.musicat.domain.SpotifyPlayer
 import com.bobrek.musicat.domain.model.Track
 import com.bobrek.musicat.ui.view.components.DisplaySongItem
+import com.bobrek.musicat.ui.viewmodel.PlayerViewModel
 
 @Composable
 fun FavouritesScreen(
-    list: List<Track>?
+    list: List<Track>?,
+    playerViewModel: PlayerViewModel
 ) {
     LazyColumn(
         modifier = Modifier
@@ -23,7 +24,7 @@ fun FavouritesScreen(
                     title = it.name,
                     user = it.artists[0].name.toString()
                 ) {
-                    SpotifyPlayer.play(it.uri)
+                    playerViewModel.play(it.uri)
                 }
             }
         }

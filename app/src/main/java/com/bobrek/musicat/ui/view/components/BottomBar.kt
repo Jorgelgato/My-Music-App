@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -22,7 +23,9 @@ fun BottomBar(navHostController: NavHostController) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNavigation {
+    BottomNavigation(
+        backgroundColor = Color.Black
+    ) {
         navigationItems.forEach { screen ->
             AddItem(screen, currentDestination, navHostController)
         }

@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.bobrek.musicat.di.SpotifyConstants
+import com.bobrek.musicat.ui.theme.MusicatTheme
 import com.bobrek.musicat.ui.view.screens.MainScreen
 import com.bobrek.musicat.ui.viewmodel.MainViewModel
 import com.spotify.android.appremote.api.ConnectionParams
@@ -27,7 +28,9 @@ class MainActivity : ComponentActivity() {
         spotifyLogin()
 
         setContent {
-            MainScreen()
+            MusicatTheme {
+                MainScreen()
+            }
         }
     }
 
@@ -36,14 +39,12 @@ class MainActivity : ComponentActivity() {
             if (it.resultCode == Activity.RESULT_OK
                 && mainViewModel.activityResult(it.resultCode, it.data)
             ) {
-                loginSuccess()
-                startActivity(
+                loginSuccess(
                     Intent(
                         this,
                         HomeActivity::class.java
                     ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 )
-                finish()
             }
         }.launch(
             AuthorizationClient.createLoginActivityIntent(
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    private fun loginSuccess() {
+    private fun loginSuccess(intent: Intent) {
         SpotifyAppRemote.connect(this, ConnectionParams.Builder(SpotifyConstants.CLIENT_ID)
             .setRedirectUri(SpotifyConstants.REDIRECT_URI)
             .showAuthView(true)
@@ -61,6 +62,8 @@ class MainActivity : ComponentActivity() {
             object : ConnectionListener {
                 override fun onConnected(spotifyAppRemote: SpotifyAppRemote) {
                     SpotifyConstants.mSpotifyAppRemote = spotifyAppRemote
+                    startActivity(intent)
+                    finish()
                 }
 
                 override fun onFailure(throwable: Throwable) {

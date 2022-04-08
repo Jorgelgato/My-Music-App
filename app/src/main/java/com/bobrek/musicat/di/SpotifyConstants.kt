@@ -7,4 +7,6 @@ object SpotifyConstants {
     const val REDIRECT_URI = "com.bobrek.musicat://callback"
     lateinit var TOKEN: String
     lateinit var mSpotifyAppRemote: SpotifyAppRemote
+
+    fun player() = mSpotifyAppRemote.playerApi
 }

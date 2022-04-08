@@ -4,13 +4,14 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.bobrek.musicat.domain.SpotifyPlayer
 import com.bobrek.musicat.domain.model.Playlist
 import com.bobrek.musicat.ui.view.components.DisplayItem
+import com.bobrek.musicat.ui.viewmodel.PlayerViewModel
 
 @Composable
 fun HomeScreen(
-    list: List<Playlist>?
+    list: List<Playlist>?,
+    playerViewModel: PlayerViewModel
 ) {
     LazyColumn(
         modifier = Modifier
@@ -23,7 +24,7 @@ fun HomeScreen(
                     title = it.name,
                     user = it.owner.display_name.toString(),
                     ) {
-                    SpotifyPlayer.play(it.uri)
+                    playerViewModel.play(it.uri)
                 }
             }
         }

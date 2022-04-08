@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -27,11 +28,15 @@ fun DisplayItem(image: String, title: String, user: String, onClick: () -> Unit)
             ) {
                 Text(
                     text = title, fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = user,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
