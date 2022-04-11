@@ -18,7 +18,7 @@ import com.bobrek.musicat.ui.view.navigation.Destinations
 fun BottomBar(navHostController: NavHostController) {
     val navigationItems = listOf(
         Destinations.Home,
-        Destinations.Favourites
+        Destinations.Favorites
     )
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

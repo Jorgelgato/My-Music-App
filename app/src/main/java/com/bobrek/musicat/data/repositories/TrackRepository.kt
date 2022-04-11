@@ -10,8 +10,8 @@ class TrackRepository @Inject constructor(
     private val api: TrackService,
     private val trackProvider: TrackProvider
 ) {
-    suspend fun getFavourites(): List<Track> {
-        val response = api.getFavourites().map { it.toDomain() }
+    suspend fun getFavorites(): List<Track> {
+        val response = api.getFavorites().map { it.toDomain() }
         trackProvider.tracks = response
         return response
     }

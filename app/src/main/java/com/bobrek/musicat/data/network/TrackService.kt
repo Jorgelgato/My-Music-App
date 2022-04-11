@@ -11,9 +11,9 @@ class TrackService @Inject constructor(
     private val api: SpotifyApiClient,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun getFavourites(): List<TrackModel> {
+    suspend fun getFavorites(): List<TrackModel> {
         return withContext(dispatcher) {
-            api.getFavourites().body()?.items?.map {
+            api.getFavorites(0, 50).body()?.items?.map {
                 Gson().fromJson(
                     it,
                     TrackInfo::class.java

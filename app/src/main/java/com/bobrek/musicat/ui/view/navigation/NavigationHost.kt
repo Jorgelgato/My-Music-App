@@ -5,7 +5,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.bobrek.musicat.ui.view.screens.FavouritesScreen
+import com.bobrek.musicat.ui.view.screens.FavoritesScreen
 import com.bobrek.musicat.ui.view.screens.HomeScreen
 import com.bobrek.musicat.ui.viewmodel.HomeViewModel
 import com.bobrek.musicat.ui.viewmodel.PlayerViewModel
@@ -21,9 +21,9 @@ fun NavigationHost(
             homeViewModel.getPlaylists()
             HomeScreen(homeViewModel.playlistModel.observeAsState().value, playerViewModel)
         }
-        composable(Destinations.Favourites.route) {
-            homeViewModel.getFavourites()
-            FavouritesScreen(homeViewModel.favouritesModel.observeAsState().value, playerViewModel)
+        composable(Destinations.Favorites.route) {
+            homeViewModel.getFavorites()
+            FavoritesScreen(homeViewModel.favoritesModel.observeAsState().value, playerViewModel)
         }
     }
 }

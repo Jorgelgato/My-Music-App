@@ -11,5 +11,5 @@ sealed class Destinations(
     val icon: ImageVector
 ) {
     object Home: Destinations("home", "Inicio", Icons.Filled.Home)
-    object Favourites: Destinations("favourites", "Favoritos", Icons.Filled.Favorite)
+    object Favorites: Destinations("favorites", "Favoritos", Icons.Filled.Favorite)
 }

@@ -9,4 +9,7 @@ object SpotifyConstants {
     lateinit var mSpotifyAppRemote: SpotifyAppRemote
 
     fun player() = mSpotifyAppRemote.playerApi
+
+    fun user() = mSpotifyAppRemote.userApi
+
 }

@@ -3,7 +3,7 @@ package com.bobrek.musicat.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bobrek.musicat.domain.GetFavouritesUseCase
+import com.bobrek.musicat.domain.GetFavoritesUseCase
 import com.bobrek.musicat.domain.GetPlaylistsUseCase
 import com.bobrek.musicat.domain.model.Playlist
 import com.bobrek.musicat.domain.model.Track
@@ -14,11 +14,11 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPlaylistsUseCase: GetPlaylistsUseCase,
-    private val getFavouritesUseCase: GetFavouritesUseCase
+    private val getFavoritesUseCase: GetFavoritesUseCase
 ) : ViewModel() {
 
     val playlistModel = MutableLiveData<List<Playlist>>()
-    val favouritesModel = MutableLiveData<List<Track>>()
+    val favoritesModel = MutableLiveData<List<Track>>()
 
     fun getPlaylists(){
         viewModelScope.launch {
@@ -29,11 +29,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getFavourites(){
+    fun getFavorites(){
         viewModelScope.launch {
-            val result = getFavouritesUseCase()
+            val result = getFavoritesUseCase()
             if (!result.isNullOrEmpty()){
-                favouritesModel.postValue(result)
+                favoritesModel.postValue(result)
             }
         }
     }
